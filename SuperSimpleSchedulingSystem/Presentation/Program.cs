@@ -24,6 +24,7 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 
 builder.Services.AddTransient<IApplicationConfiguration, ApplicationConfiguration>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

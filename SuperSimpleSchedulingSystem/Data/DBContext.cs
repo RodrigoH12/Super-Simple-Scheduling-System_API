@@ -26,7 +26,36 @@ namespace SuperSimpleSchedulingSystem.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.HasDefaultSchema("dbo");
+
+            modelBuilder.Entity<Class>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("PK_Class_Id");
+
+                entity.HasMany(e => e.Students)
+                    .WithMany(e => e.Classes);
+            });
+
+            modelBuilder.Entity<Student>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("PK_Student_Id");
+
+                entity.HasOne(e => e.User)
+                    .WithOne(e => e.Student)
+                    .HasForeignKey<Student>(e => e.UserId)
+                    .HasConstraintName("FK_Student_UserId")
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("PK_User_Id");
+            });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

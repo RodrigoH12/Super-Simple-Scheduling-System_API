@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
 	<RootNamespace>SuperSimpleSchedulingSystem.Data</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+	<InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>

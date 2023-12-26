@@ -3,6 +3,7 @@ using SuperSimpleSchedulingSystem.Configuration;
 using SuperSimpleSchedulingSystem.Data;
 using SuperSimpleSchedulingSystem.Logic.Managers;
 using SuperSimpleSchedulingSystem.Logic.Managers.Interfaces;
+using SuperSimpleSchedulingSystem.Presentation.Middleware;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -73,6 +74,7 @@ builder.Services.AddSwaggerGen(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -81,6 +83,8 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     });
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseCors("AllowAnyOrigin");
 

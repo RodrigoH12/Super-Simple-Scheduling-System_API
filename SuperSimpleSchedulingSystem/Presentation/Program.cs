@@ -34,6 +34,7 @@ builder.Services.AddTransient<IApplicationConfiguration, ApplicationConfiguratio
 
 builder.Services.AddTransient<IClassManager, ClassManager>();
 builder.Services.AddTransient<IStudentManager, StudentManager>();
+builder.Services.AddTransient<IUserManager, UserManager>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Add AutoMapper configuration

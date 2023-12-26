@@ -11,7 +11,7 @@ namespace SuperSimpleSchedulingSystem.Logic.Models
         public string Teacher { get; set; }
         public ScheduleEnum Schedule { get; set; }
     
-        public virtual IEnumerable<StudentDto>? Students { get; set; }
+        public virtual ICollection<StudentDto> Students { get; set; }
 
         public override bool IsValid()
         {

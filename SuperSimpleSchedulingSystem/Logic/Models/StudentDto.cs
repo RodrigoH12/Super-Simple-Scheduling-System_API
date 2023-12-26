@@ -10,7 +10,7 @@ namespace SuperSimpleSchedulingSystem.Logic.Models
         public Guid UserId { get; set; }
 
         public virtual UserDto User { get; set; }
-        public virtual IEnumerable<ClassDto>? Classes { get; set; }
+        public virtual ICollection<ClassDto> Classes { get; set; }
 
         public override bool IsValid()
         {

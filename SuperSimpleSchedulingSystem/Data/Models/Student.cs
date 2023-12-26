@@ -18,6 +18,6 @@ namespace SuperSimpleSchedulingSystem.Data.Models
 
 
         public virtual User User { get; set; }
-        public virtual IEnumerable<Class>? Classes { get; set; }
+        public virtual ICollection<Class> Classes { get; set; }
     }
 }

@@ -21,6 +21,6 @@ namespace SuperSimpleSchedulingSystem.Data.Models
         public ScheduleEnum Schedule { get; set; }
 
 
-        public virtual IEnumerable<Student>? Students { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

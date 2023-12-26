@@ -26,7 +26,54 @@ namespace SuperSimpleSchedulingSystem.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.HasDefaultSchema("dbo");
+
+            modelBuilder.Entity<Class>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("PK_Class_Id");
+
+                entity.HasMany(e => e.Students)
+                    .WithMany(e => e.Classes)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "ClassStudent",
+                        j => j
+                            .HasOne<Student>()
+                            .WithMany()
+                            .HasForeignKey("StudentId"),
+                        j => j
+                            .HasOne<Class>()
+                            .WithMany()
+                            .HasForeignKey("ClassId")
+                        );
+            });
+
+            modelBuilder.Entity<Student>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("PK_Student_Id");
+
+                entity.HasOne(e => e.User)
+                    .WithOne(e => e.Student)
+                    .HasForeignKey<Student>(e => e.UserId)
+                    .HasConstraintName("FK_Student_UserId");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("PK_User_Id");
+            });
+
+            SeedData(modelBuilder);
+            base.OnModelCreating(modelBuilder);
+        }
+
+        private static void SeedData(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(InitialSeeding.SeedUsers);
+            modelBuilder.Entity<Student>().HasData(InitialSeeding.SeedStudents);
+            modelBuilder.Entity<Class>().HasData(InitialSeeding.SeedClasses);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SuperSimpleSchedulingSystem.Data;
 using SuperSimpleSchedulingSystem.Data.Models;
+using SuperSimpleSchedulingSystem.Logic.Exceptions;
 using SuperSimpleSchedulingSystem.Logic.Managers.Interfaces;
 using SuperSimpleSchedulingSystem.Logic.Models;
 
@@ -26,7 +27,7 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         public async Task<StudentDto> GetById(Guid id)
         {
             Student student = await _uow.StudentRepository.GetById(id)
-                ?? throw new Exception($"Student with Id {id} not found");
+                ?? throw new NotFoundException($"Student with Id {id} not found");
 
             return _mapper.Map<StudentDto>(student);
         }
@@ -35,15 +36,15 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         {
             if (studentDto == null)
             {
-                throw new Exception("Fields should not be empty");
+                throw new BadRequestException("Fields should not be empty");
             }
             if (!studentDto.IsValid())
             {
-                throw new Exception("Invalid state");
+                throw new BadRequestException("Invalid state");
             }
             if (await StudentExists(studentDto))
             {
-                throw new Exception("The exact same Student already exists");
+                throw new AlreadyExistException("The exact same Student already exists");
             }
 
             Student newStudent = _mapper.Map<Student>(studentDto);
@@ -55,19 +56,19 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         {
             if (studentDto == null)
             {
-                throw new Exception("Fields should not be empty");
+                throw new BadRequestException("Fields should not be empty");
             }
             if (!studentDto.IsValid())
             {
-                throw new Exception("Invalid state");
+                throw new BadRequestException("Invalid state");
             }
             if (await StudentExists(studentDto))
             {
-                throw new Exception("The exact same Student already exists");
+                throw new AlreadyExistException("The exact same Student already exists");
             }
 
             Student student = await _uow.StudentRepository.GetById(id)
-                ?? throw new Exception($"Student with Id {id} not found");
+                ?? throw new NotFoundException($"Student with Id {id} not found");
             student.FirstName = studentDto.FirstName;
             student.LastName = studentDto.LastName;
 
@@ -78,7 +79,7 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         public async Task<bool> Delete(Guid id)
         {
             Student student = await _uow.StudentRepository.GetById(id)
-                ?? throw new Exception($"Student with Id {id} not found");
+                ?? throw new NotFoundException($"Student with Id {id} not found");
 
             await _uow.StudentRepository.Delete(student);
             return await _uow.StudentRepository.GetById(id) == null;

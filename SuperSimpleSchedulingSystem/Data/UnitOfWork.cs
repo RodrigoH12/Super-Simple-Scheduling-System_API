@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Serilog;
+using SuperSimpleSchedulingSystem.Data.Exceptions;
 using SuperSimpleSchedulingSystem.Data.Repositories;
 using SuperSimpleSchedulingSystem.Data.Repositories.Interfaces;
 
@@ -48,20 +49,20 @@ namespace SuperSimpleSchedulingSystem.Data
                 RollBackTransaction();
                 string message = $"Error to save changes on Database -> Save() {Environment.NewLine}Message: {ex.Message}{Environment.NewLine}";
                 Log.Error(ex, $"{message}{Environment.NewLine} Stack trace: {Environment.NewLine}");
-                throw new Exception("Can not save changes, error in Database", ex.InnerException);
+                throw new DatabaseException("Can not save changes, error in Database", ex.InnerException);
             }
             catch (DbUpdateException ex)
             {
                 RollBackTransaction();
                 string message = $"Error to save changes on Database -> Save() {Environment.NewLine}Message: {ex.Message}{Environment.NewLine}";
                 Log.Error(ex, $"{message}{Environment.NewLine} Stack trace: {Environment.NewLine}");
-                throw new Exception("Can not save changes, error in Database", ex.InnerException);
+                throw new DatabaseException("Can not save changes, error in Database", ex.InnerException);
             }
             catch (Exception ex)
             {
                 string message = $"Error to save changes on Database -> Save() {Environment.NewLine}Message: {ex.Message}{Environment.NewLine}";
                 Log.Error(ex, $"{message}{Environment.NewLine} Stack trace: {Environment.NewLine}");
-                throw new Exception("Can not save changes, error in Database", ex.InnerException);
+                throw new DatabaseException("Can not save changes, error in Database", ex.InnerException);
             }
         }
 

@@ -34,7 +34,18 @@ namespace SuperSimpleSchedulingSystem.Data
                     .HasName("PK_Class_Id");
 
                 entity.HasMany(e => e.Students)
-                    .WithMany(e => e.Classes);
+                    .WithMany(e => e.Classes)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "ClassStudent",
+                        j => j
+                            .HasOne<Student>()
+                            .WithMany()
+                            .HasForeignKey("StudentId"),
+                        j => j
+                            .HasOne<Class>()
+                            .WithMany()
+                            .HasForeignKey("ClassId")
+                        );
             });
 
             modelBuilder.Entity<Student>(entity =>
@@ -45,8 +56,7 @@ namespace SuperSimpleSchedulingSystem.Data
                 entity.HasOne(e => e.User)
                     .WithOne(e => e.Student)
                     .HasForeignKey<Student>(e => e.UserId)
-                    .HasConstraintName("FK_Student_UserId")
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .HasConstraintName("FK_Student_UserId");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -55,7 +65,15 @@ namespace SuperSimpleSchedulingSystem.Data
                     .HasName("PK_User_Id");
             });
 
+            SeedData(modelBuilder);
             base.OnModelCreating(modelBuilder);
+        }
+
+        private static void SeedData(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(InitialSeeding.SeedUsers);
+            modelBuilder.Entity<Student>().HasData(InitialSeeding.SeedStudents);
+            modelBuilder.Entity<Class>().HasData(InitialSeeding.SeedClasses);
         }
     }
 }

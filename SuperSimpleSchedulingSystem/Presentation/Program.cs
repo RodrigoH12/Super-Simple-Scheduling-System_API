@@ -32,6 +32,7 @@ builder.Services.AddTransient<IApplicationConfiguration, ApplicationConfiguratio
 
 // Add Managers and UnitOfWork
 
+builder.Services.AddTransient<IClassManager, ClassManager>();
 builder.Services.AddTransient<IStudentManager, StudentManager>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

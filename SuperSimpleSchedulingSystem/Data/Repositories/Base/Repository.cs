@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SuperSimpleSchedulingSystem.Data.Exceptions;
 using SuperSimpleSchedulingSystem.Data.Models.Base;
 
 namespace SuperSimpleSchedulingSystem.Data.Repositories.Base
@@ -37,22 +38,36 @@ namespace SuperSimpleSchedulingSystem.Data.Repositories.Base
             }
             catch (Exception e)
             {
-                throw new Exception("ERROR: " + e.InnerException.Message);
+                throw new DatabaseException($"Error while trying to create entity of type {typeof(T).Name}", e.InnerException);
             }
         }
 
         public async Task<T> Update(T entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
-            return entity;
+            try
+            {
+                _dbContext.Entry(entity).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+                return entity;
+            }
+            catch (Exception e)
+            {
+                throw new DatabaseException($"Error while trying to update entity of type {typeof(T).Name}", e.InnerException);
+            }
         }
 
         public async Task<T> Delete(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
-            await _dbContext.SaveChangesAsync();
-            return entity;
+            try
+            {
+                _dbContext.Set<T>().Remove(entity);
+                await _dbContext.SaveChangesAsync();
+                return entity;
+            }
+            catch (Exception e)
+            {
+                throw new DatabaseException($"Error while trying to delete entity of type {typeof(T).Name}", e.InnerException);
+            }
         }
     }
 }

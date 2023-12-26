@@ -1,5 +1,9 @@
 using Microsoft.OpenApi.Models;
 using SuperSimpleSchedulingSystem.Configuration;
+using SuperSimpleSchedulingSystem.Data;
+using SuperSimpleSchedulingSystem.Logic.Managers;
+using SuperSimpleSchedulingSystem.Logic.Managers.Interfaces;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +12,7 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnC
 builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: false, reloadOnChange: true);
 builder.Configuration.AddEnvironmentVariables();
 
-// Add CORS properties
+// Add Cross-Origin Resource Sharing configuration
 
 builder.Services.AddCors(options =>
 {
@@ -21,13 +25,29 @@ builder.Services.AddCors(options =>
     );
 });
 
-// Add services to the container.
+// Add Database and Configuration settings
 
+builder.Services.AddDbContext<DBContext>();
 builder.Services.AddTransient<IApplicationConfiguration, ApplicationConfiguration>();
+
+// Add Managers and UnitOfWork
+
+builder.Services.AddTransient<IStudentManager, StudentManager>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Add AutoMapper configuration
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddControllers();
+
+// Add Controller and JSON serialization configuration
+
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+
+// Add Swagger/OpenAPI configuration
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -41,6 +61,11 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("https://github.com/RodrigoH12")
         }
     });
+
+    var file = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var filePath = Path.Combine(AppContext.BaseDirectory, file);
+    options.IncludeXmlComments(filePath);
+
 });
 
 var app = builder.Build();

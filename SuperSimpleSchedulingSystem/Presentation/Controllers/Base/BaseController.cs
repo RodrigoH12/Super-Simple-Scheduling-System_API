@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SuperSimpleSchedulingSystem.Logic.Managers.Base;
+using SuperSimpleSchedulingSystem.Presentation.Middleware;
 
 namespace SuperSimpleSchedulingSystem.Presentation.Controllers.Base
 {
@@ -20,7 +21,7 @@ namespace SuperSimpleSchedulingSystem.Presentation.Controllers.Base
         [HttpGet]
         public virtual async Task<IActionResult> GetAllItems()
         {
-            return Ok(await _classManager.GetAll());
+            return Ok(new MiddlewareResponse<IEnumerable<T>>(await _classManager.GetAll()));
         }
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace SuperSimpleSchedulingSystem.Presentation.Controllers.Base
         public async Task<IActionResult> GetItemById([FromRoute] Guid id)
         {
             T response = await _classManager.GetById(id);
-            return Ok(response);
+            return Ok(new MiddlewareResponse<T>(response));
         }
 
         /// <summary>
@@ -48,7 +49,7 @@ namespace SuperSimpleSchedulingSystem.Presentation.Controllers.Base
         public virtual async Task<IActionResult> Create([FromBody] T itemDto)
         {
             T response = await _classManager.Create(itemDto);
-            return Ok(response);
+            return Ok(new MiddlewareResponse<T>(response));
         }
 
         /// <summary>
@@ -60,7 +61,7 @@ namespace SuperSimpleSchedulingSystem.Presentation.Controllers.Base
         public virtual async Task<IActionResult> UpdateById([FromRoute] Guid id, [FromBody] T itemDto)
         {
             T response = await _classManager.Update(id, itemDto);
-            return Ok(response);
+            return Ok(new MiddlewareResponse<T>(response));
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace SuperSimpleSchedulingSystem.Presentation.Controllers.Base
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> DeleteById([FromRoute] Guid id)
         {
-            return Ok(await _classManager.Delete(id));
+            return Ok(new MiddlewareResponse<bool>(await _classManager.Delete(id)));
         }
     }
 }

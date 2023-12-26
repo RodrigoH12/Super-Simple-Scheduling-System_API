@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SuperSimpleSchedulingSystem.Data;
 using SuperSimpleSchedulingSystem.Data.Models;
+using SuperSimpleSchedulingSystem.Logic.Exceptions;
 using SuperSimpleSchedulingSystem.Logic.Managers.Interfaces;
 using SuperSimpleSchedulingSystem.Logic.Models;
 
@@ -26,7 +27,7 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         public async Task<UserDto> GetById(Guid id)
         {
             User user = await _uow.UserRepository.GetById(id)
-                ?? throw new Exception($"User with Id {id} not found");
+                ?? throw new NotFoundException($"User with Id {id} not found");
 
             return _mapper.Map<UserDto>(user);
         }
@@ -35,15 +36,15 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         {
             if (userDto == null)
             {
-                throw new Exception("Fields should not be empty");
+                throw new BadRequestException("Fields should not be empty");
             }
             if (!userDto.IsValid())
             {
-                throw new Exception("Invalid state");
+                throw new BadRequestException("Invalid state");
             }
             if (await UserExists(userDto))
             {
-                throw new Exception("The User already exists");
+                throw new AlreadyExistException("The User already exists");
             }
 
             User newUser = _mapper.Map<User>(userDto);
@@ -55,19 +56,19 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         {
             if (userDto == null)
             {
-                throw new Exception("Fields should not be empty");
+                throw new BadRequestException("Fields should not be empty");
             }
             if (!userDto.IsValid())
             {
-                throw new Exception("Invalid state");
+                throw new BadRequestException("Invalid state");
             }
             if (await UserExists(userDto))
             {
-                throw new Exception("The User already exists");
+                throw new AlreadyExistException("The User already exists");
             }
 
             User user = await _uow.UserRepository.GetById(id)
-                ?? throw new Exception($"User with Id {id} not found");
+                ?? throw new NotFoundException($"User with Id {id} not found");
             user.Password = userDto.Password;
 
             User updatedUser = await _uow.UserRepository.Update(user);
@@ -77,7 +78,7 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         public async Task<bool> Delete(Guid id)
         {
             User user = await _uow.UserRepository.GetById(id)
-                ?? throw new Exception($"User with Id {id} not found");
+                ?? throw new NotFoundException($"User with Id {id} not found");
 
             await _uow.UserRepository.Delete(user);
             return await _uow.UserRepository.GetById(id) == null;

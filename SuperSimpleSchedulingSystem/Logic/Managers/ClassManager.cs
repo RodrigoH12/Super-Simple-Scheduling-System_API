@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SuperSimpleSchedulingSystem.Data;
 using SuperSimpleSchedulingSystem.Data.Models;
+using SuperSimpleSchedulingSystem.Logic.Exceptions;
 using SuperSimpleSchedulingSystem.Logic.Managers.Interfaces;
 using SuperSimpleSchedulingSystem.Logic.Models;
 
@@ -26,7 +27,7 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         public async Task<ClassDto> GetById(Guid id)
         {
             Class specificClass = await _uow.ClassRepository.GetById(id)
-                ?? throw new Exception($"Class with Id {id} not found");
+                ?? throw new NotFoundException($"Class with Id {id} not found");
 
             return _mapper.Map<ClassDto>(specificClass);
         }
@@ -35,15 +36,15 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         {
             if (classDto == null)
             {
-                throw new Exception("Fields should not be empty");
+                throw new BadRequestException("Fields should not be empty");
             }
             if (!classDto.IsValid())
             {
-                throw new Exception("Invalid state");
+                throw new BadRequestException("Invalid state", classDto.GetErrors());
             }
             if (await ClassExists(classDto))
             {
-                throw new Exception("The exact same Class already exists");
+                throw new AlreadyExistException("The exact same Class already exists");
             }
 
             Class newClass = _mapper.Map<Class>(classDto);
@@ -55,19 +56,19 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         {
             if (classDto == null)
             {
-                throw new Exception("Fields should not be empty");
+                throw new BadRequestException("Fields should not be empty");
             }
             if (!classDto.IsValid())
             {
-                throw new Exception("Invalid state");
+                throw new BadRequestException("Invalid state", classDto.GetErrors());
             }
             if (await ClassExists(classDto))
             {
-                throw new Exception("The exact same Class already exists");
+                throw new AlreadyExistException("The exact same Class already exists");
             }
 
             Class specificClass = await _uow.ClassRepository.GetById(id)
-                ?? throw new Exception($"Class with Id {id} not found");
+                ?? throw new NotFoundException($"Class with Id {id} not found");
             specificClass.Description = classDto.Description;
             specificClass.Teacher = classDto.Teacher;
             specificClass.Schedule = classDto.Schedule;
@@ -79,7 +80,7 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
         public async Task<bool> Delete(Guid id)
         {
             Class specificClass = await _uow.ClassRepository.GetById(id)
-                ?? throw new Exception($"Class with Id {id} not found");
+                ?? throw new NotFoundException($"Class with Id {id} not found");
 
             await _uow.ClassRepository.Delete(specificClass);
             return await _uow.ClassRepository.GetById(id) == null;

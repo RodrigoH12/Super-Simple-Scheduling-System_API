@@ -86,6 +86,14 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
             return await _uow.ClassRepository.GetById(id) == null;
         }
 
+        public async Task<ClassDto> GetStudentsInAClass(Guid id)
+        {
+            Class specificClass = await _uow.ClassRepository.GetClassByIdIncludingStudents(id)
+                ?? throw new NotFoundException($"Class with Id {id} not found");
+
+            return _mapper.Map<ClassDto>(specificClass);
+        }
+
         public async Task<ClassDto> AssignStudentToClass(Guid classId, Guid studentId)
         {
             Class specificClass = await _uow.ClassRepository.GetClassByIdIncludingStudents(classId)

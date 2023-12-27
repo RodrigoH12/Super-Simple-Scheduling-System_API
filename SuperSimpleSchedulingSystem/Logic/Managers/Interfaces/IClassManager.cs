@@ -5,6 +5,7 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers.Interfaces
 {
     public interface IClassManager : IGenericManager<ClassDto>
     {
+        Task<ClassDto> GetStudentsInAClass(Guid id);
         Task<ClassDto> AssignStudentToClass(Guid classId, Guid studentId);
     }
 }

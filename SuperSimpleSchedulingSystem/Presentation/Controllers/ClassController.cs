@@ -19,6 +19,19 @@ namespace SuperSimpleSchedulingSystem.Presentation.Controllers
         }
 
         /// <summary>
+        /// Get a list of all Students assigned in a Class.
+        /// </summary>
+        /// <param name="id">Id of the Class.</param>
+        /// <returns>The specified Class with the list of Students assigned.</returns>
+        /// <response code="200">Success or some expected Error.</response>
+        [HttpGet("{id}/students")]
+        public virtual async Task<IActionResult> GetStudentsInAClass([FromRoute] Guid id)
+        {
+            ClassDto response = await _classManager.GetStudentsInAClass(id);
+            return Ok(new MiddlewareResponse<ClassDto>(response));
+        }
+
+        /// <summary>
         /// Assign a Student into a specific Class.
         /// </summary>
         /// <param name="classId">Id of the Class.</param>

@@ -5,5 +5,6 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers.Interfaces
 {
     public interface IStudentManager : IGenericManager<StudentDto>
     {
+        Task<StudentDto> GetStudentClasses(Guid id);
     }
 }

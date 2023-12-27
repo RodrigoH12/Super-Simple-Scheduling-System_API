@@ -85,6 +85,14 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
             return await _uow.StudentRepository.GetById(id) == null;
         }
 
+        public async Task<StudentDto> GetStudentClasses(Guid id)
+        {
+            Student student = await _uow.StudentRepository.GetStudentByIdIncludingClasses(id)
+                ?? throw new NotFoundException($"Student with Id {id} not found");
+
+            return _mapper.Map<StudentDto>(student);
+        }
+
         private async Task<bool> StudentExists(StudentDto studentDto)
         {
             IEnumerable<Student> students = await _uow.StudentRepository.GetAll();

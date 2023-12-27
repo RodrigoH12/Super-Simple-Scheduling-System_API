@@ -5,6 +5,6 @@ namespace SuperSimpleSchedulingSystem.Data.Repositories.Interfaces
 {
     public interface IClassRepository : IRepository<Class>
     {
-
+        Task<Class> GetClassByIdIncludingStudents(Guid id);
     }
 }

@@ -86,6 +86,27 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
             return await _uow.ClassRepository.GetById(id) == null;
         }
 
+        public async Task<ClassDto> AssignStudentToClass(Guid classId, Guid studentId)
+        {
+            Class specificClass = await _uow.ClassRepository.GetClassByIdIncludingStudents(classId)
+                ?? throw new NotFoundException($"Class with Id {classId} not found");
+
+            Student student = await _uow.StudentRepository.GetById(studentId)
+                ?? throw new NotFoundException($"Student with Id {studentId} not found");
+
+            bool studentAlreadyAssigned = specificClass.Students.Contains(student);
+            if (studentAlreadyAssigned)
+            {
+                throw new LogicException($"The Student {studentId} is already assigned into the Class {classId}");
+            }
+
+            specificClass.Students.Add(student);
+
+            Class updatedClass = await _uow.ClassRepository.Update(specificClass);
+
+            return _mapper.Map<ClassDto>(updatedClass);
+        }
+
         private async Task<bool> ClassExists(ClassDto classDto)
         {
             IEnumerable<Class> classes = await _uow.ClassRepository.GetAll();

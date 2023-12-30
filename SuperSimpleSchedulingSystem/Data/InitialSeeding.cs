@@ -91,64 +91,80 @@ namespace SuperSimpleSchedulingSystem.Data
             new() {
                 Id = new Guid("A0D208E3-2B70-4C31-9E8B-08DB4D6C094C"),
                 Title = "Data Structures and Algorithms",
-                Description = "Explore the fundamental concepts of data structures and algorithms, with hands-on coding exercises.",
+                Description = "Explore the fundamental concepts of data structures and algorithms, with hands-on coding exercises",
                 Teacher = "Alice Johnson",
                 Schedule = ScheduleEnum.B
             },
             new() {
                 Id = new Guid("4C84C62B-B98F-4670-9E88-08DB4D6C094C"),
                 Title = "Web Development Basics",
-                Description = "Learn the basics of web development, including HTML, CSS, and JavaScript.",
+                Description = "Learn the basics of web development, including HTML, CSS, and JavaScript",
                 Teacher = "Bob Smith",
                 Schedule = ScheduleEnum.C
             },
             new() {
                 Id = new Guid("646A14A8-9A45-4C79-9E87-08DB4D6C094C"),
                 Title = "Database Design and SQL",
-                Description = "Understand the principles of database design and master SQL for effective data management.",
+                Description = "Understand the principles of database design and master SQL for effective data management",
                 Teacher = "Charlie Brown",
                 Schedule = ScheduleEnum.A
             },new() {
                 Id = new Guid("D8276C8F-84E5-41FA-9E8C-08DB4D6C094C"),
                 Title = "Mobile App Development with React Native",
-                Description = "Build cross-platform mobile applications using React Native and modern JavaScript frameworks.",
+                Description = "Build cross-platform mobile applications using React Native and modern JavaScript frameworks",
                 Teacher = "Diana Miller",
                 Schedule = ScheduleEnum.D
             },
             new() {
                 Id = new Guid("C791A7A4-625E-4A46-9E90-08DB4D6C094C"),
                 Title = "Cybersecurity Fundamentals",
-                Description = "Explore the basics of cybersecurity and learn essential techniques to secure computer systems.",
+                Description = "Explore the basics of cybersecurity and learn essential techniques to secure computer systems",
                 Teacher = "Edward Turner",
                 Schedule = ScheduleEnum.B
             },
             new() {
                 Id = new Guid("A9BB7A24-F2BB-4FAF-9E91-08DB4D6C094C"),
                 Title = "Cloud Computing Intermediate",
-                Description = "Get an introduction to cloud computing and popular cloud platforms like AWS and Azure.",
+                Description = "Get an introduction to cloud computing and popular cloud platforms like AWS and Azure",
                 Teacher = "Jack Miller",
                 Schedule = ScheduleEnum.B
             },
             new() {
                 Id = new Guid("B0A1221C-414F-45D6-9E92-08DB4D6C094C"),
                 Title = "Artificial Intelligence Fundamentals",
-                Description = "Dive into the basics of artificial intelligence and machine learning algorithms.",
+                Description = "Dive into the basics of artificial intelligence and machine learning algorithms",
                 Teacher = "Grace Watson",
                 Schedule = ScheduleEnum.C
             },
             new() {
                 Id = new Guid("08CB5F72-944F-4E9C-9E94-08DB4D6C094C"),
                 Title = "Software Engineering Best Practices",
-                Description = "Explore the best practices in software engineering for creating maintainable and scalable applications.",
+                Description = "Explore the best practices in software engineering for creating maintainable and scalable applications",
                 Teacher = "Henry White",
                 Schedule = ScheduleEnum.D
             },
             new() {
                 Id = new Guid("6EEAB56D-9357-43A5-9E96-08DB4D6C094C"),
                 Title = "Network Security",
-                Description = "Learn the essentials of network security, including encryption, firewalls, and intrusion detection.",
+                Description = "Learn the essentials of network security, including encryption, firewalls, and intrusion detection",
                 Teacher = "Ivy Robinson",
                 Schedule = ScheduleEnum.A,
+            },
+            new()
+            {
+                Id = new Guid("B7D2D21F-15C5-4CC8-9E92-08DB4D6C094C"),
+                Title = "DevOps Practices and Automation",
+                Description = "Explore DevOps methodologies and practices for efficient software development and deployment",
+                Teacher = "Noah Davis",
+                Schedule = ScheduleEnum.A
+            },
+            new()
+            {
+                Id = new Guid("F1379D18-1A12-4A36-9E91-08DB4D6C094C"),
+                Title = "UI/UX Design Workshop",
+                Description = "Immerse yourself in the world of user interface and user experience design",
+                Teacher = "Carlos Adams",
+                Schedule = ScheduleEnum.D
             }
         };
     }

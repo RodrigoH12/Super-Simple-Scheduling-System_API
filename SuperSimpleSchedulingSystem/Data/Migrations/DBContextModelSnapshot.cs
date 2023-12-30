@@ -78,7 +78,7 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                         new
                         {
                             Id = new Guid("a0d208e3-2b70-4c31-9e8b-08db4d6c094c"),
-                            Description = "Explore the fundamental concepts of data structures and algorithms, with hands-on coding exercises.",
+                            Description = "Explore the fundamental concepts of data structures and algorithms, with hands-on coding exercises",
                             Schedule = 1,
                             Teacher = "Alice Johnson",
                             Title = "Data Structures and Algorithms"
@@ -86,7 +86,7 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                         new
                         {
                             Id = new Guid("4c84c62b-b98f-4670-9e88-08db4d6c094c"),
-                            Description = "Learn the basics of web development, including HTML, CSS, and JavaScript.",
+                            Description = "Learn the basics of web development, including HTML, CSS, and JavaScript",
                             Schedule = 2,
                             Teacher = "Bob Smith",
                             Title = "Web Development Basics"
@@ -94,7 +94,7 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                         new
                         {
                             Id = new Guid("646a14a8-9a45-4c79-9e87-08db4d6c094c"),
-                            Description = "Understand the principles of database design and master SQL for effective data management.",
+                            Description = "Understand the principles of database design and master SQL for effective data management",
                             Schedule = 0,
                             Teacher = "Charlie Brown",
                             Title = "Database Design and SQL"
@@ -102,7 +102,7 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                         new
                         {
                             Id = new Guid("d8276c8f-84e5-41fa-9e8c-08db4d6c094c"),
-                            Description = "Build cross-platform mobile applications using React Native and modern JavaScript frameworks.",
+                            Description = "Build cross-platform mobile applications using React Native and modern JavaScript frameworks",
                             Schedule = 3,
                             Teacher = "Diana Miller",
                             Title = "Mobile App Development with React Native"
@@ -110,7 +110,7 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                         new
                         {
                             Id = new Guid("c791a7a4-625e-4a46-9e90-08db4d6c094c"),
-                            Description = "Explore the basics of cybersecurity and learn essential techniques to secure computer systems.",
+                            Description = "Explore the basics of cybersecurity and learn essential techniques to secure computer systems",
                             Schedule = 1,
                             Teacher = "Edward Turner",
                             Title = "Cybersecurity Fundamentals"
@@ -118,7 +118,7 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                         new
                         {
                             Id = new Guid("a9bb7a24-f2bb-4faf-9e91-08db4d6c094c"),
-                            Description = "Get an introduction to cloud computing and popular cloud platforms like AWS and Azure.",
+                            Description = "Get an introduction to cloud computing and popular cloud platforms like AWS and Azure",
                             Schedule = 1,
                             Teacher = "Jack Miller",
                             Title = "Cloud Computing Intermediate"
@@ -126,7 +126,7 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                         new
                         {
                             Id = new Guid("b0a1221c-414f-45d6-9e92-08db4d6c094c"),
-                            Description = "Dive into the basics of artificial intelligence and machine learning algorithms.",
+                            Description = "Dive into the basics of artificial intelligence and machine learning algorithms",
                             Schedule = 2,
                             Teacher = "Grace Watson",
                             Title = "Artificial Intelligence Fundamentals"
@@ -134,7 +134,7 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                         new
                         {
                             Id = new Guid("08cb5f72-944f-4e9c-9e94-08db4d6c094c"),
-                            Description = "Explore the best practices in software engineering for creating maintainable and scalable applications.",
+                            Description = "Explore the best practices in software engineering for creating maintainable and scalable applications",
                             Schedule = 3,
                             Teacher = "Henry White",
                             Title = "Software Engineering Best Practices"
@@ -142,10 +142,26 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                         new
                         {
                             Id = new Guid("6eeab56d-9357-43a5-9e96-08db4d6c094c"),
-                            Description = "Learn the essentials of network security, including encryption, firewalls, and intrusion detection.",
+                            Description = "Learn the essentials of network security, including encryption, firewalls, and intrusion detection",
                             Schedule = 0,
                             Teacher = "Ivy Robinson",
                             Title = "Network Security"
+                        },
+                        new
+                        {
+                            Id = new Guid("b7d2d21f-15c5-4cc8-9e92-08db4d6c094c"),
+                            Description = "Explore DevOps methodologies and practices for efficient software development and deployment",
+                            Schedule = 0,
+                            Teacher = "Noah Davis",
+                            Title = "DevOps Practices and Automation"
+                        },
+                        new
+                        {
+                            Id = new Guid("f1379d18-1a12-4a36-9e91-08db4d6c094c"),
+                            Description = "Immerse yourself in the world of user interface and user experience design",
+                            Schedule = 3,
+                            Teacher = "Carlos Adams",
+                            Title = "UI/UX Design Workshop"
                         });
                 });
 

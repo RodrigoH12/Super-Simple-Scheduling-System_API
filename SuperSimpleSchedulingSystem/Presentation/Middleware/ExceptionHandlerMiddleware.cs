@@ -37,12 +37,12 @@ namespace SuperSimpleSchedulingSystem.Presentation.Middleware
             }
             else if (ex is LogicException)
             {
-                ErrorResponse.Status = (int)HttpStatusCode.OK;
+                ErrorResponse.Status = (int)HttpStatusCode.BadRequest;
                 ErrorResponse.error.Message = $"Logic Exception {Environment.NewLine} Message: {ex.Message + Environment.NewLine}";
             }
             else if (ex is DatabaseException)
             {
-                ErrorResponse.Status = (int)HttpStatusCode.OK;
+                ErrorResponse.Status = (int)HttpStatusCode.InternalServerError;
                 ErrorResponse.error.Message = $"Data Error {Environment.NewLine} Message: {ex.Message}{Environment.NewLine}";
             }
             else if (ex is BadRequestException)

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SuperSimpleSchedulingSystem.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialWithData : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -101,16 +101,18 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                 columns: new[] { "Id", "Description", "Schedule", "Teacher", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("08cb5f72-944f-4e9c-9e94-08db4d6c094c"), "Explore the best practices in software engineering for creating maintainable and scalable applications.", 3, "Henry White", "Software Engineering Best Practices" },
+                    { new Guid("08cb5f72-944f-4e9c-9e94-08db4d6c094c"), "Explore the best practices in software engineering for creating maintainable and scalable applications", 3, "Henry White", "Software Engineering Best Practices" },
                     { new Guid("2f29c595-2e96-40d5-9e86-08db4d6c094c"), "In this class you will learn the fundamentals of Javascript thanks to the realization of multiple projects", 0, "Jhon Petersonn", "Introduction to Programming with Javascript" },
-                    { new Guid("4c84c62b-b98f-4670-9e88-08db4d6c094c"), "Learn the basics of web development, including HTML, CSS, and JavaScript.", 2, "Bob Smith", "Web Development Basics" },
-                    { new Guid("646a14a8-9a45-4c79-9e87-08db4d6c094c"), "Understand the principles of database design and master SQL for effective data management.", 0, "Charlie Brown", "Database Design and SQL" },
-                    { new Guid("6eeab56d-9357-43a5-9e96-08db4d6c094c"), "Learn the essentials of network security, including encryption, firewalls, and intrusion detection.", 0, "Ivy Robinson", "Network Security" },
-                    { new Guid("a0d208e3-2b70-4c31-9e8b-08db4d6c094c"), "Explore the fundamental concepts of data structures and algorithms, with hands-on coding exercises.", 1, "Alice Johnson", "Data Structures and Algorithms" },
-                    { new Guid("a9bb7a24-f2bb-4faf-9e91-08db4d6c094c"), "Get an introduction to cloud computing and popular cloud platforms like AWS and Azure.", 1, "Jack Miller", "Cloud Computing Intermediate" },
-                    { new Guid("b0a1221c-414f-45d6-9e92-08db4d6c094c"), "Dive into the basics of artificial intelligence and machine learning algorithms.", 2, "Grace Watson", "Artificial Intelligence Fundamentals" },
-                    { new Guid("c791a7a4-625e-4a46-9e90-08db4d6c094c"), "Explore the basics of cybersecurity and learn essential techniques to secure computer systems.", 1, "Edward Turner", "Cybersecurity Fundamentals" },
-                    { new Guid("d8276c8f-84e5-41fa-9e8c-08db4d6c094c"), "Build cross-platform mobile applications using React Native and modern JavaScript frameworks.", 3, "Diana Miller", "Mobile App Development with React Native" }
+                    { new Guid("4c84c62b-b98f-4670-9e88-08db4d6c094c"), "Learn the basics of web development, including HTML, CSS, and JavaScript", 2, "Bob Smith", "Web Development Basics" },
+                    { new Guid("646a14a8-9a45-4c79-9e87-08db4d6c094c"), "Understand the principles of database design and master SQL for effective data management", 0, "Charlie Brown", "Database Design and SQL" },
+                    { new Guid("6eeab56d-9357-43a5-9e96-08db4d6c094c"), "Learn the essentials of network security, including encryption, firewalls, and intrusion detection", 0, "Ivy Robinson", "Network Security" },
+                    { new Guid("a0d208e3-2b70-4c31-9e8b-08db4d6c094c"), "Explore the fundamental concepts of data structures and algorithms, with hands-on coding exercises", 1, "Alice Johnson", "Data Structures and Algorithms" },
+                    { new Guid("a9bb7a24-f2bb-4faf-9e91-08db4d6c094c"), "Get an introduction to cloud computing and popular cloud platforms like AWS and Azure", 1, "Jack Miller", "Cloud Computing Intermediate" },
+                    { new Guid("b0a1221c-414f-45d6-9e92-08db4d6c094c"), "Dive into the basics of artificial intelligence and machine learning algorithms", 2, "Grace Watson", "Artificial Intelligence Fundamentals" },
+                    { new Guid("b7d2d21f-15c5-4cc8-9e92-08db4d6c094c"), "Explore DevOps methodologies and practices for efficient software development and deployment", 0, "Noah Davis", "DevOps Practices and Automation" },
+                    { new Guid("c791a7a4-625e-4a46-9e90-08db4d6c094c"), "Explore the basics of cybersecurity and learn essential techniques to secure computer systems", 1, "Edward Turner", "Cybersecurity Fundamentals" },
+                    { new Guid("d8276c8f-84e5-41fa-9e8c-08db4d6c094c"), "Build cross-platform mobile applications using React Native and modern JavaScript frameworks", 3, "Diana Miller", "Mobile App Development with React Native" },
+                    { new Guid("f1379d18-1a12-4a36-9e91-08db4d6c094c"), "Immerse yourself in the world of user interface and user experience design", 3, "Carlos Adams", "UI/UX Design Workshop" }
                 });
 
             migrationBuilder.InsertData(

@@ -99,13 +99,19 @@ namespace SuperSimpleSchedulingSystem.Logic.Managers
             Class specificClass = await _uow.ClassRepository.GetClassByIdIncludingStudents(classId)
                 ?? throw new NotFoundException($"Class with Id {classId} not found");
 
-            Student student = await _uow.StudentRepository.GetById(studentId)
+            Student student = await _uow.StudentRepository.GetStudentByIdIncludingClasses(studentId)
                 ?? throw new NotFoundException($"Student with Id {studentId} not found");
 
             bool studentAlreadyAssigned = specificClass.Students.Contains(student);
             if (studentAlreadyAssigned)
             {
                 throw new LogicException($"The Student {studentId} is already assigned into the Class {classId}");
+            }
+
+            bool studentHasClassInSameSchedule = student.Classes.Any(c => c.Schedule == specificClass.Schedule);
+            if (studentHasClassInSameSchedule)
+            {
+                throw new LogicException($"The Student {studentId} is already assigned in a Class in {Enum.GetName(specificClass.Schedule)} schedule");
             }
 
             specificClass.Students.Add(student);

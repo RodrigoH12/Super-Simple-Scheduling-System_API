@@ -302,13 +302,13 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                     b.HasOne("SuperSimpleSchedulingSystem.Data.Models.Class", null)
                         .WithMany()
                         .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SuperSimpleSchedulingSystem.Data.Models.Student", null)
                         .WithMany()
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -317,7 +317,7 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                     b.HasOne("SuperSimpleSchedulingSystem.Data.Models.User", "User")
                         .WithOne("Student")
                         .HasForeignKey("SuperSimpleSchedulingSystem.Data.Models.Student", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_Student_UserId");
 

@@ -65,7 +65,7 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                         principalSchema: "dbo",
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,14 +85,14 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                         principalSchema: "dbo",
                         principalTable: "Class",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ClassStudent_Student_StudentId",
                         column: x => x.StudentId,
                         principalSchema: "dbo",
                         principalTable: "Student",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(

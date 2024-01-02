@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using SuperSimpleSchedulingSystem.Configuration;
 using SuperSimpleSchedulingSystem.Data.Models;
 
@@ -40,11 +41,13 @@ namespace SuperSimpleSchedulingSystem.Data
                         j => j
                             .HasOne<Student>()
                             .WithMany()
-                            .HasForeignKey("StudentId"),
+                            .HasForeignKey("StudentId")
+                            .OnDelete(DeleteBehavior.Restrict),
                         j => j
                             .HasOne<Class>()
                             .WithMany()
                             .HasForeignKey("ClassId")
+                            .OnDelete(DeleteBehavior.Restrict)
                         );
             });
 
@@ -56,7 +59,8 @@ namespace SuperSimpleSchedulingSystem.Data
                 entity.HasOne(e => e.User)
                     .WithOne(e => e.Student)
                     .HasForeignKey<Student>(e => e.UserId)
-                    .HasConstraintName("FK_Student_UserId");
+                    .HasConstraintName("FK_Student_UserId")
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<User>(entity =>

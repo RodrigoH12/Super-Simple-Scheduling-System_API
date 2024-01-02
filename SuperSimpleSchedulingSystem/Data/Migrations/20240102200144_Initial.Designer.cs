@@ -12,7 +12,7 @@ using SuperSimpleSchedulingSystem.Data;
 namespace SuperSimpleSchedulingSystem.Data.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20231230012841_Initial")]
+    [Migration("20240102200144_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -305,13 +305,13 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                     b.HasOne("SuperSimpleSchedulingSystem.Data.Models.Class", null)
                         .WithMany()
                         .HasForeignKey("ClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SuperSimpleSchedulingSystem.Data.Models.Student", null)
                         .WithMany()
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -320,7 +320,7 @@ namespace SuperSimpleSchedulingSystem.Data.Migrations
                     b.HasOne("SuperSimpleSchedulingSystem.Data.Models.User", "User")
                         .WithOne("Student")
                         .HasForeignKey("SuperSimpleSchedulingSystem.Data.Models.Student", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_Student_UserId");
 
